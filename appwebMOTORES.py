@@ -14,9 +14,9 @@ socketio = SocketIO(app)
 # En lugar de cargar un modelo YOLOv5, utiliza tu modelo entrenado en YOLOv8
 model = YOLO('.\\best.pt')
 
-url = 'http://192.168.137.50/cam-hi.jpg' #carrito
+url = 'http://192.168.137.201/cam-hi.jpg' #carrito
 # Dirección IP y puerto del ESP32
-ESP32_CAM_IP = '192.168.137.50'
+ESP32_CAM_IP = '192.168.137.201'
 
 def obtener_video():
     while True:
@@ -25,7 +25,10 @@ def obtener_video():
         img = cv2.imdecode(img_np, -1)
         # Redimensionar la imagen antes de la codificación
         img_resized = cv2.resize(img, (640, 640))
+        
         # Detección de objetos
+
+        """"
         results = model(img_resized)
         # Obtener las cajas del objeto detectado
         boxes = results[0].boxes.xyxy.cpu().numpy()
@@ -41,6 +44,8 @@ def obtener_video():
             cv2.rectangle(img_resized, (x1, y1), (x2, y2), (0, 255, 0), 2)
             #cv2.putText(img_resized, f'{model.names[int(cls)]}', (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
             cv2.putText(img_resized, cls, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+
+        """
         # Codificar la imagen con las cajas delimitadoras dibujadas en base64
         _, img_encoded = cv2.imencode('.jpg', img_resized)
         img_base64 = base64.b64encode(img_encoded).decode('utf-8')

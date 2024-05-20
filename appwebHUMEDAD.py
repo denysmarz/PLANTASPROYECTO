@@ -14,9 +14,9 @@ app = Flask(__name__)
 socketio = SocketIO(app)
 
 # En lugar de cargar un modelo YOLOv5, utiliza tu modelo entrenado en YOLOv8
-model = YOLO('.\\bestv1HUMEDAD.pt')
+model = YOLO('.\\bestv2HUMEDAD.pt')
 
-url = 'http://192.168.141.105:8080/video' #carrito
+url = 'http://192.168.0.101:8080/video' #carrito
 cap = cv2.VideoCapture(url)
 def obtener_video():
     while True:
@@ -36,7 +36,9 @@ def obtener_video():
         # Codificar la imagen con las cajas delimitadoras dibujadas en base64
        # _, img_encoded = cv2.imencode('.jpg', anotacion)
        # img_base64 = base64.b64encode(img_encoded).decode('utf-8')
-
+        probs = results[0].probs.data.cpu().numpy()
+        print("SECOOOOOOOOOO=",probs[1],"dasdasdasda",probs[0])
+        
         _, img_encoded = cv2.imencode('.jpg', anotacion)
         img_base64 = base64.b64encode(img_encoded).decode('utf-8')
         

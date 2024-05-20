@@ -42,6 +42,7 @@ def obtener_video():
         class_names = results[0].names
         #CONFIANZA DE PREDICCION
         conf = results[0].boxes.conf.cpu().numpy()
+        print(boxes)
         # Dibujar las cajas delimitadoras y las etiquetas de clase
         for box, class_id in zip(boxes, class_ids):
             
