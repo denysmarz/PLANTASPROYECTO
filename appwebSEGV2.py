@@ -21,16 +21,16 @@ import requests
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-model = YOLO('.\\bestv2LSEG.pt')
-modelHUMEDAD = YOLO('.\\bestv2HUMEDAD.pt')
+model = YOLO('.\\bestSEGMENTACIONv3originalesaumento.pt')
+modelHUMEDAD = YOLO('.\\bestHUMEDADv3PRE.pt')
 
 #url = 'http://192.168.137.236:8080/video' #carrito
 url = '.\\20240519_173140.mp4'
 #'.\\20240519_173228.mp4','.\\20240519_173140.mp4','.\\20240519_173059.mp4'
 #ESP32
-url2 = 'http://192.168.137.45/cam-hi.jpg' #carrito
+url2 = 'http://192.168.137.110/cam-hi.jpg ' #carrito
 # Dirección IP y puerto del ESP32
-ESP32_CAM_IP = '192.168.137.45'
+ESP32_CAM_IP = '192.168.137.110'
 cap = cv2.VideoCapture(url)
 def obtener_video():
     while True:
